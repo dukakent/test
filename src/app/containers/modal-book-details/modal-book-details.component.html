@@ -1,0 +1,30 @@
+<h6 mat-dialog-title>Book details</h6>
+
+<mat-dialog-content>
+  <table class="book-details">
+    <tr>
+      <td class="book-details-attribute">Title:</td>
+      <td>{{ book()?.title }}</td>
+    </tr>
+
+    <tr>
+      <td class="book-details-attribute">Author:</td>
+      <td>{{ book()?.author }}</td>
+    </tr>
+
+    <tr>
+      <td class="book-details-attribute">Summary:</td>
+      <td>{{ book()?.summary }}</td>
+    </tr>
+
+    <tr>
+      <td class="book-details-attribute">Publisher:</td>
+      <td>{{ book()?.publisher }}</td>
+    </tr>
+
+    <tr>
+      <td class="book-details-attribute">Published:</td>
+      <td>{{ book()?.publishDate | date }}</td>
+    </tr>
+  </table>
+</mat-dialog-content>

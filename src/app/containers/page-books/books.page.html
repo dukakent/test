@@ -1,0 +1,67 @@
+<div class="books-list-toolbar">
+  <span class="toolbar-item">
+    <button mat-stroked-button (click)="openModalAddBook()">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </button>
+  </span>
+
+  <app-search-input [keyword]="keyword()" (keywordChange)="setKeyword($event)"></app-search-input>
+</div>
+
+<table mat-table [dataSource]="booksList()">
+  <ng-container matColumnDef="bookOrder">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ getBookOrder(element.id) }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookImage"
+  >
+    <th mat-header-cell *matHeaderCellDef>Image</th>
+    <td mat-cell *matCellDef="let element">
+      <img class="book-image" [ngSrc]="element.imgUrl" fill alt="book image"/>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookTitle">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="openModalBookDetails(element.id)">{{ element.title }}</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookAuthor">
+    <th mat-header-cell *matHeaderCellDef>Author</th>
+    <td mat-cell *matCellDef="let element">{{ element.author }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookPublishDate">
+    <th mat-header-cell *matHeaderCellDef>Published</th>
+    <td mat-cell *matCellDef="let element">{{ element.publishDate | date }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookActions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="book-row-actions">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openModalEditBook(element.id)">
+            <mat-icon>edit</mat-icon>
+            <span>edit</span>
+          </button>
+          <button mat-menu-item (click)="openModalRemoveBook(element.id)" class="action-delete">
+            <mat-icon>remove</mat-icon>
+            <span>delete</span>
+          </button>
+        </mat-menu>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

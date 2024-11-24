@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-label>Search by keyword</mat-label>
+  <input
+    matInput
+    placeholder="Type here"
+    #input
+    [value]="keyword()"
+    (input)="setKeyword(input.value)" />
+</mat-form-field>

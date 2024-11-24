@@ -1,0 +1,53 @@
+<h6 mat-dialog-title>Add book</h6>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form" (ngSubmit)="submit()" (keyup.enter)="submit()">
+    <div>
+      <p>Title</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <input matInput placeholder="Type here" formControlName="title" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p>Author</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <input matInput placeholder="Type here" formControlName="author" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p>Summary</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <textarea matInput placeholder="Type here" formControlName="summary"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p>Publisher</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <input matInput placeholder="Type here" formControlName="publisher" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p>Publishing date</p>
+      <mat-form-field appearance="outline" class="form-field">
+        <input
+          matInput
+          formControlName="publishDate"
+          placeholder="MM/DD/YYYY"
+          [matDatepicker]="publishDatePicker"
+          (focusin)="publishDatePicker.open()"
+        />
+        <!--        by some reason <mat-datepicker-toggle> is not working. Skipping that for now -->
+        <mat-datepicker #publishDatePicker [startAt]="form.controls.publishDate.value"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button [disabled]="form.invalid" (click)="submit()">Submit</button>
+</mat-dialog-actions>
